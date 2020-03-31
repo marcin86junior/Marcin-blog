@@ -1,7 +1,7 @@
 import turtle
 import time
 
-delay = 0.1
+delay = 0.2
 
 wn = turtle.Screen()
 wn.title("Snake Game by Marcin Nowak")
