@@ -15,13 +15,26 @@
     <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
 {% endif %}
 
+{% if user.is_authenticated %}
+Jesteś zalogowany 
+<font color="white">
+{{ user.get_username }}!
+<a href="/admin/" style="color:black;"> Wyloguj się!</a>
+{% else %}
+<font color="white">
+<a href="/admin/" style="color:white;">Zaloguj się!</a>
+{% endif %}
+
             <h1><a href="/">Django Girls Blog</a></h1>
         </div>
         <div class="content container">
             <div class="row">
                 <div class="col-md-8">
+	            <font color="black">
+
                     {% block content %}
                     {% endblock %}
+
                 </div>
             </div>
         </div>
