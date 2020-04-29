@@ -1,5 +1,6 @@
 
 {% load static %}
+{% load socialaccount %}
 <html>
     <head>
         <title>Django Girls blog</title>
@@ -9,21 +10,29 @@
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     </head>
     <body>
-        <div class="page-header">
-            
-{% if user.is_authenticated %}
-    <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-{% endif %}
 
-{% if user.is_authenticated %}
-Jesteś zalogowany 
-<font color="white">
-{{ user.get_username }}!
-<a href="/admin/" style="color:black;"> Wyloguj się!</a>
-{% else %}
-<font color="white">
-<a href="/admin/" style="color:white;">Zaloguj się!</a>
-{% endif %}
+        <div class="page-header">
+             
+      	{% if user.is_authenticated %}
+	<a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+	{% endif %}
+
+	{% if user.is_authenticated %}
+	<font color="white">
+	Jesteś zalogowany 
+	{{ user.get_username }}!
+	<button><a href="/logout" %}">Wyloguj się</a></button>
+
+	{% else %}
+	<font color="white">
+	<button><a href="/admin/" %}">Zaloguj przez Djangogirls</a></button>
+	{% load socialaccount %}
+	<button><a href="{% provider_login_url "google" %}">Zaloguj przez Google</a></button>
+	{% endif %}
+
+	{% if user.is_authenticated %}
+	<a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
+	{% endif %}
 
             <h1><a href="/">Django Girls Blog</a></h1>
         </div>

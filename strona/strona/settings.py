@@ -25,7 +25,7 @@ SECRET_KEY = 'e3goxzq49lvgf2edb5t3hkq19e-9e*ac8=t99ty$zyddt(mnuo'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -38,6 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'social_django',
+
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook'
 ]
 
 MIDDLEWARE = [
@@ -120,4 +128,28 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_URL = '/home/marcin86/marcin86.pythonanywhere.com/strona/blog/static/css/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+SITE_ID = 2
+
+LOGIN_REDIRECT_URL = "/"
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'https://www.googleapis.com/auth/userinfo.profile',
+            'https://www.googleapis.com/auth/userinfo.email'
+        ],
+        'AUTH_PARAMS': { 'access_type': 'online' }
+    }  
+}
+
+LOGIN_REDIRECT_URL = '/members/'
+LOGOUT_URL = '/'
+
+
